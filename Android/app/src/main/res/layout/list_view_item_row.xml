@@ -14,22 +14,22 @@
         <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView"
+                android:id="@+id/imgIcon"
                 android:src="@android:drawable/ic_menu_gallery" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="31dp"
             android:text="New Text"
-            android:id="@+id/textView" />
+            android:id="@+id/txtTitle"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
-        android:id="@+id/textView2" />
+        android:id="@+id/txtDesc" />
 
 </LinearLayout>

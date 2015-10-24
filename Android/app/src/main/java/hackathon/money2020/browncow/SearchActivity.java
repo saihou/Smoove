@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -22,8 +23,8 @@ public class SearchActivity extends AppCompatActivity {
     ListView listView;
     ImageButton btnSearch;
     EditText txtSearch;
-    ArrayList<String> listOfRestaurants;
-    ArrayAdapter<String> adapter;
+    ListViewRow[] listOfRestaurants;
+    ListViewRowAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +32,16 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         listView = (ListView) findViewById(R.id.listView);
-        listOfRestaurants = new ArrayList<String>();
-        adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, listOfRestaurants);
+        listOfRestaurants = new ListViewRow [] {};
+        adapter = new ListViewRowAdapter(this, R.layout.list_view_item_row, listOfRestaurants);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = ((TextView) view.findViewById(R.id.txtTitle)).getText().toString();
+                Toast.makeText(getBaseContext(), item, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         txtSearch = (EditText) findViewById(R.id.searchBar);
         txtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -92,7 +100,7 @@ public class SearchActivity extends AppCompatActivity {
 
         if (searchPhrase.length() > 2) {
             //search
-            addToListView("omg");
+            addToListView();
 
             Toast.makeText(getBaseContext(), "Searching for " + searchPhrase + "!", Toast.LENGTH_SHORT).show();
         } else if (searchPhrase.length() > 0){
@@ -103,7 +111,14 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-    public void addToListView(String item) {
-        adapter.add(item);
+    public void addToListView() {
+        //listOfRestaurants = GETJSONOBJECTFROMSERVER
+        //hardcode for now
+        listOfRestaurants = new ListViewRow[] {
+                new ListViewRow(android.R.drawable.ic_menu_gallery, "Denny's", "A fast food restaurant that seems good but I haven't got the chance to eat"),
+                new ListViewRow(android.R.drawable.ic_menu_add, "Koi Palace", "Bloody expensive and bloody good Chinese food")
+        };
+        adapter = new ListViewRowAdapter(this, R.layout.list_view_item_row, listOfRestaurants);
+        listView.setAdapter(adapter);
     }
 }
