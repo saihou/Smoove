@@ -1,4 +1,4 @@
-package hackathon.money2020.browncow;
+package hackathon.money2020.smoove;
 
 /**
  * Created by sai on 10/24/15.

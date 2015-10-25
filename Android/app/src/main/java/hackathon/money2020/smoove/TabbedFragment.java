@@ -1,4 +1,4 @@
-package hackathon.money2020.browncow;
+package hackathon.money2020.smoove;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -24,6 +24,10 @@ public class TabbedFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private int mPage;
+    ListView listViewTab;
+    ListViewRow[] listOfTransactions;
+    ListViewRowAdapter adapter;
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -64,6 +68,13 @@ public class TabbedFragment extends Fragment {
         if (mPage == 2) {
             fab.hide();
 
+            listOfTransactions = new ListViewRow [] {
+                    new ListViewRow(R.drawable.ic_attach_money_black_36dp, "Koi Palace", "You paid $25 on 23/08/2015")
+            };
+
+            adapter = new ListViewRowAdapter(getActivity(), R.layout.list_view_item_row, listOfTransactions);
+            listView.setAdapter(adapter);
+
             if (listView.getCount() == 0) {
                 textView.setText("You have no transactions yet!");
             } else {
@@ -81,7 +92,8 @@ public class TabbedFragment extends Fragment {
             if (listView.getCount() == 0) {
                 textView.setText("You have no reservations yet!");
             } else {
-                textView.setVisibility(View.GONE);
+                textView.setText("UH WTF");
+                //textView.setVisibility(View.GONE);
             }
         }
         return view;
