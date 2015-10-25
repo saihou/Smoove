@@ -12,7 +12,7 @@
 		<!--[if lte IE 8]><script src="../static/assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="../static/assets/css/main.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="../static/assets/css/ie8.css" /><![endif]-->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
 		<!--<script src="asset/js/jquery.min.js"></script>-->
 		<!--<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	-->
@@ -153,10 +153,9 @@
 									 {"name": "Tyler", "user_id": 15, "time": "11:00", "pax": 10}]
 									 */
 					for (itv = 11; itv < 24; itv++) {
-						time = itv;
-						time_24 = time.toString() + ":00";
+						time_24 = itv.toString() + ":00";
 
-						row = '<table class="default"> <thead><tr><td colspan="5">' + time_24 + '</td></tr></thead></table><div class="tableWrap"><table id=' + time_24 + '><tbody><tr class="reserve"><th>Customer Name</th><th>Pax</th><th>Checked-in</th><th>Table Number</th><th>Check out</th></tr>';
+						row = '<table class="default"> <thead><tr><td colspan="5">' + time_24 + '</td></tr></thead></table><div class="tableWrap"><table id=rsvn_time_' + itv + '><tbody><tr class="reserve"><th>Customer Name</th><th>Pax</th><th>Checked-in</th><th>Table Number</th><th>Check out</th></tr><tr></tr></tbody></table></div>';
 						$("div#timetable").append(row);
 					}
 
@@ -168,6 +167,7 @@
 
 				function form_hide() {
 					$("#fillTableNo").hide();
+					update_table_number();
 				}
 
 				function change_date(day) {
@@ -192,25 +192,21 @@
 			<script type="text/javascript">
 			function get_rsvn() {
 				$.getJSON($SCRIPT_ROOT + '/get_reservation_ajax', {}, function(rsvn_data) {
-					console.log(rsvn_data.result)
 					for (index in rsvn_data.result) {
 						data = rsvn_data.result[index];
-						console.log(data)
-						if (data[5] == time_24) {
-							name = data[6];
-							pax = data[3];
-							id = data[1];
-							merc_id = data[2];
-							day = data[4];
-							row = '<tr id=' + id + '><td id="name">'+ name +'</td><td id="pax">'+ pax +'</td><td id="check_in"><button id="check_in" onclick="form_show()">Check In</button><div id="fillTableNo"><div><form action="#" id="tableNoForm" name="form"><input id="tableNo" name="tableNo" placeholder="Table Number" type="text"><button id="tableNosubmit" onclick="form_hide()">Confirm</button></form></div></div></td><td id="tbl_no">-</td><td id="check_out">-</td></tr>';
-						}
+						name = data[6];
+						pax = data[3];
+						id = data[1];
+						merc_id = data[2];
+						day = data[4];
+						row = '<tbody><tr class="reserve"><th>Customer Name</th><th>Pax</th><th>Checked-in</th><th>Table Number</th><th>Check out</th></tr><tr></tr><tr><td id="name">'+ name +'</td><td id="pax">'+ pax +'</td><td id="check_in"><button id="check_in" onclick="form_show()">Check In</button><div id="fillTableNo"><div><form action="#" id="tableNoForm" name="form"><input id="tableNo" name="tableNo" placeholder="Table Number" type="text"><button id="tableNosubmit" onclick="form_hide()">Confirm</button></form></div></div></td><td id="tbl_no">-</td><td id="check_out">-</td></tr></tbody>';
+						$('table#rsvn_time_' + data[5]).html(row);
 					}
-					row += '</tbody></table></div>'
-					console.log(row);
-					$("div#timetable").append(row);
 				});
 			}
+			function update_table_number() {
 
+			}
 
 			</script>
 			
