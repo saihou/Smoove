@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="25-10-2015"
+                android:text="2015-10-25"
                 android:textSize="80px"
                 android:id="@+id/date"
                 android:layout_alignBottom="@+id/descDate"

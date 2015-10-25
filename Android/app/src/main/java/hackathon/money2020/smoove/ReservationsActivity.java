@@ -2,14 +2,19 @@ package hackathon.money2020.smoove;
 
 
 import android.app.DialogFragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
 
 public class ReservationsActivity extends AppCompatActivity {
 
@@ -81,6 +86,20 @@ public class ReservationsActivity extends AppCompatActivity {
     }
 
     public void confirmReservation(View v) {
-        Log.d("Reserve", "ABC");
+        String currentTimeStamp = new SimpleDateFormat("yyyy-MM-dd HHmmss").format(Calendar.getInstance().getTime());
+        String numPax = pax.getText().toString();
+        String userId = "1";
+        String reservationTime = date.getText().toString() + " " + time.getText().toString();
+
+        HashMap<String, String> params = new HashMap<String,String>();
+        params.put("user_id", userId);
+        params.put("merchant_id", merchantId);
+        params.put("pax", numPax);
+        params.put("current_time_stamp", currentTimeStamp);
+        params.put("reservation_time", reservationTime);
+
+        JSONObject jsonObj = new JSONObject(params);
+        System.out.println(jsonObj.toString());
+        new PostToApis(jsonObj).execute(Utils.server_post_reservation);
     }
 }

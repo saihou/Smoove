@@ -1,13 +1,10 @@
 package hackathon.money2020.smoove;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -59,7 +56,6 @@ public class CallApis extends AsyncTask<String, Void, JSONArray> {
             SearchActivity activity = (SearchActivity) callingActivity;
             activity.setListOfRestaurants(result);
             activity.updateUi();
-            Log.d("Async", "I'm here");
         }
     }
 }

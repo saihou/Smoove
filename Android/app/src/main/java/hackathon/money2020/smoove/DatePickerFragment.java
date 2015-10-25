@@ -30,7 +30,7 @@ public class DatePickerFragment extends DialogFragment
     public void onDateSet(DatePicker view, int year, int month, int day) {
         // Do something with the date chosen by the user
         TextView date = (TextView) getActivity().findViewById(R.id.date);
-        date.setText((month+1)+"-"+day+"-"+year);
+        date.setText(year+"-"+(month+1)+"-"+day);
     }
 }
 

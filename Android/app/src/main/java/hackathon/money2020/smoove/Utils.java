@@ -7,4 +7,5 @@ public class Utils {
     static String server_transact = "http://52.25.48.108:5000/get_transaction/1";
     static String server_reserve = "http://52.25.48.108:5000/get_reservation/1";
     static String server_restaurant = "http://52.25.48.108:5000/get_restaurants";
+    static String server_post_reservation = "http://52.25.48.108:5000/reserve/";
 }

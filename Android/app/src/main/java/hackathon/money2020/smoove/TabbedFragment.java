@@ -6,15 +6,14 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.support.v4.app.Fragment;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 /**
  * Created by sai on 10/24/15.
