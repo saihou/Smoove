@@ -13,6 +13,7 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<!--<script src="asset/js/jquery.min.js"></script>-->
 		<!--<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	-->
 	</head>
@@ -28,9 +29,9 @@
 								<h2>Your Reservation</h2>
 							</header>
 							<div class="info">
-								<span class="date"><span class="month">Jul<span>y</span></span> <span class="day">14</span><span class="year">, 2014</span></span>
+								<span class="date"><span class="month">Oct<span>y</span></span> <span id="day" class="day">25</span><span class="year">, 2014</span></span>
 							</div>
-							<div class="timetable">
+							<div id="timetable">
 							</div>
 						</article>
 
@@ -71,45 +72,46 @@
 								<tbody>
 									<tr>
 										<td colspan="3" class="pad"><span>&nbsp;</span></td>
-										<td><a href="#">1</a></td>
-										<td><a href="#">2</a></td>
-										<td><a href="#">3</a></td>
-										<td><a href="#">4</a></td>
+										<td><a href="#" id="day_1" onclick="change_date(1)">1</a></td>
+										<td><a href="#" id="day_2" onclick="change_date(2)">2</a></td>
+										<td><a href="#" id="day_3" onclick="change_date(3)">3</a></td>
+										<td><a href="#" id="day_4" onclick="change_date(4)">4</a></td>
 									</tr>
 									<tr>
-										<td><a href="#">5</a></td>
-										<td><a href="#">6</a></td>
-										<td><a href="#">7</a></td>
-										<td><a href="#">8</a></td>
-										<td><a href="#">9</a></td>
-										<td><a href="#">10</a></td>
-										<td><a href="#">11</a></td>
+
+										<td><a href="#" id="day_5" onclick="change_date(5)">5</a></td>
+										<td><a href="#" id="day_6" onclick="change_date(6)">6</a></td>
+										<td><a href="#" id="day_7" onclick="change_date(7)">7</a></td>
+										<td><a href="#" id="day_8" onclick="change_date(8)">8</a></td>
+										<td><a href="#" id="day_9" onclick="change_date(9)">9</a></td>
+										<td><a href="#" id="day_10" onclick="change_date(10)">10</a></td>
+										<td><a href="#" id="day_11" onclick="change_date(11)">11</a></td>
 									</tr>
 									<tr>
-										<td><a href="#">12</a></td>
-										<td><a href="#">13</a></td>
-										<td><a href="#">14</a></td>
-										<td class="today"><a href="#">15</a></td>
-										<td><a href="#">16</a></td>
-										<td><a href="#">17</a></td>
-										<td><a href="#">18</a></td>
+										<td><a href="#" id="day_12" onclick="change_date(12)">12</a></td>
+										<td><a href="#" id="day_13" onclick="change_date(13)">13</a></td>
+										<td><a href="#" id="day_14" onclick="change_date(14)">14</a></td>
+										<td><a href="#" id="day_15" onclick="change_date(15)">15</a></td>
+										<td><a href="#" id="day_16" onclick="change_date(16)">16</a></td>
+										<td><a href="#" id="day_17" onclick="change_date(17)">17</a></td>
+										<td><a href="#" id="day_18" onclick="change_date(18)">18</a></td>
 									</tr>
 									<tr>
-										<td><a href="#">19</a></td>
-										<td><a href="#">20</a></td>
-										<td><a href="#">21</a></td>
-										<td><a href="#">22</a></td>
-										<td><a href="#">23</a></td>
-										<td><a href="#">24</a></td>
-										<td><a href="#">25</a></td>
+										<td><a href="#" id="day_19" onclick="change_date(19)">19</a></td>
+										<td><a href="#" id="day_20" onclick="change_date(20)">20</a></td>
+										<td><a href="#" id="day_21" onclick="change_date(21)">21</a></td>
+										<td><a href="#" id="day_22" onclick="change_date(22)">22</a></td>
+										<td><a href="#" id="day_23" onclick="change_date(23)">23</a></td>
+										<td><a href="#" id="day_24" onclick="change_date(24)">24</a></td>
+										<td class="today"><a href="#" id="day_25" onclick="change_date(25)">25</a></td>
 									</tr>
 									<tr>
-										<td><a href="#">26</a></td>
-										<td><a href="#">27</a></td>
-										<td><a href="#">28</a></td>
-										<td><a href="#">29</a></td>
-										<td><a href="#">30</a></td>
-										<td><a href="#">31</a></td>
+										<td><a href="#" id="day_26" onclick="change_date(26)">26</a></td>
+										<td><a href="#" id="day_27" onclick="change_date(27)">27</a></td>
+										<td><a href="#" id="day_28" onclick="change_date(28)">28</a></td>
+										<td><a href="#" id="day_29" onclick="change_date(29)">29</a></td>
+										<td><a href="#" id="day_30" onclick="change_date(30)">30</a></td>
+										<td><a href="#" id="day_31" onclick="change_date(31)">31</a></td>
 										<td class="pad" colspan="1"><span>&nbsp;</span></td>
 									</tr>
 								</tbody>
@@ -147,36 +149,46 @@
 			</script>
 			<script type="text/javascript">
 				$(function() {
-					var rsvn_data = [{"name": "Jack", "user_id": 11, "time": "11:00", "pax": 5},
+
+					/* var rsvn_data = [{"name": "Jack", "user_id": 11, "time": "11:00", "pax": 5},
 									 {"name": "Sai", "user_id": 12, "time": "13:00", "pax": 3},
 									 {"name": "Shing", "user_id": 13, "time": "12:00", "pax": 2},
 									 {"name": "Will", "user_id": 14, "time": "14:00", "pax": 6},
 									 {"name": "Tyler", "user_id": 15, "time": "11:00", "pax": 10}]
+									 */
 					for (itv = 0; itv < 13; itv++) {
 						time = 11 + itv;
 						time_24 = time.toString() + ":00";
-						row = '<table class="default"> <thead><tr><td colspan="5">' + time_24 + '</td></tr></thead></table><div class="tableWrap"><table><tbody><tr class="reserve"><th>Customer Name</th><th>Pax</th><th>Checked-in</th><th>Table Number</th><th>Check out</th></tr>';
-						for (index in rsvn_data) {
-							data = rsvn_data[index];
-							if (data['time'] == time_24) {
-								name = data['name'];
-								pax = data['pax'];
-								id = data['user_id'];
-								row += '<tr id=' + id + '><td id="name">'+ name +'</td><td id="pax">'+ pax +'</td><td id="check_in"><button id="check_in" onclick="form_show()">Check In</button><div id="fillTableNo"><div><form action="#" id="tableNoForm" name="form"><input id="tableNo" name="tableNo" placeholder="Table Number" type="text"><button id="tableNosubmit" onclick="form_hide()">Confirm</button></form></div></div></td><td id="tbl_no">-</td><td id="check_out">-</td></tr>';
-							}
-						}
-						row += '</tbody></table></div>'
-						$("div.timetable").append(row);
 					}
+
 				});
 
 				function form_show() {
+					row = '<table class="default"> <thead><tr><td colspan="5">' + time_24 + '</td></tr></thead></table><div class="tableWrap"><table><tbody><tr class="reserve"><th>Customer Name</th><th>Pax</th><th>Checked-in</th><th>Table Number</th><th>Check out</th></tr>';
+
+					for (index in rsvn_data) {
+						data = rsvn_data[index];
+						if (data['time'] == time_24) {
+							name = data['name'];
+							pax = data['pax'];
+							id = data['user_id'];
+							row += '<tr id=' + id + '><td id="name">'+ name +'</td><td id="pax">'+ pax +'</td><td id="check_in"><button id="check_in" onclick="form_show()">Check In</button><div id="fillTableNo"><div><form action="#" id="tableNoForm" name="form"><input id="tableNo" name="tableNo" placeholder="Table Number" type="text"><button id="tableNosubmit" onclick="form_hide()">Confirm</button></form></div></div></td><td id="tbl_no">-</td><td id="check_out">-</td></tr>';
+						}
+					}
+					row += '</tbody></table></div>'
+					$("div#timetable").append(row);
 					$("#fillTableNo").show();
 				}
 
 				function form_hide() {
 					$("#fillTableNo").hide();
 				}
+
+				function change_date(day) {
+					$("#day").html(day);
+				}
+
+
 				
 			</script>
 			<script type="text/javascript">
