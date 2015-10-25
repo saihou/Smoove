@@ -39,7 +39,7 @@ def get_reservation_ajax():
 	cursor.close()
 	return jsonify(result=data)
 
-@app.route('/charge_user', methods=['GET'])
+@app.route('/charge_user', methods=['POST'])
 def charge_user():
 	cursor = smoovedb.cursor()
 	merchant_id = '2'
