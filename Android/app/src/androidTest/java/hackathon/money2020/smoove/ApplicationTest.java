@@ -1,4 +1,4 @@
-package hackathon.money2020.browncow;
+package hackathon.money2020.smoove;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
