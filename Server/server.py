@@ -126,7 +126,7 @@ def get_rsvn(user_id):
 	query = ("SELECT rs.rsvn_date date_recorded, rs.rsvn_pax pax, rs.rsvn_time_in rsvn_time, uc.users_first_name client_first_name, uc.users_last_name client_last_name, um.users_first_name merchant_name \
 				FROM reservations rs \
 				inner join users_new uc on uc.idusers = rs.rsvn_user_id \
-				inner join users_new um on um.idusers = rs.rsvn_merchant_id where rs.rsvn_user_id=" + user_id + " and rs.rsvn_time_out is not null order by rs.rsvn_date")
+				inner join users_new um on um.idusers = rs.rsvn_merchant_id where rs.rsvn_user_id=" + user_id + " and rs.rsvn_time_out is null order by rs.rsvn_date")
 	cursor.execute(query)
 	header = ["date_recorded", "pax", "rsvn_time", "client_first_name", "client_last_name", "merchant_name"]
 	data = []
