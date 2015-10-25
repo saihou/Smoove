@@ -1,6 +1,9 @@
 package hackathon.money2020.browncow;
 
 import android.app.Activity;
+import android.net.Uri;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -8,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,7 +23,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks,
+        TabbedFragment.OnFragmentInteractionListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -105,6 +110,11 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    public void onFragmentInteraction(Uri uri) {
+        //TODO: implement...??
+        Log.d("Fragment", "ABC");
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -133,7 +143,23 @@ public class MainActivity extends AppCompatActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            View rootView;
+
+            if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
+                rootView = inflater.inflate(R.layout.fragment_main_tabs, container, false);
+
+                final ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
+                viewPager.setAdapter(new TabbedFragmentPagerAdapter(getChildFragmentManager(),
+                        getContext()));
+
+                // Give the TabLayout the ViewPager
+                TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.sliding_tabs);
+                tabLayout.setupWithViewPager(viewPager);
+            }
+            else {
+                rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            }
+
             return rootView;
         }
 
