@@ -13,6 +13,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.support.v4.app.Fragment;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 /**
  * Created by sai on 10/24/15.
  */
@@ -69,10 +72,10 @@ public class TabbedFragment extends Fragment {
         if (mPage == 2) {
             fab.hide();
 
-            AsyncTask<String, Void, Object> restCall = new CallApis().execute(Utils.server_transact);
+            AsyncTask<String, Void, JSONArray> restCall = new CallApis().execute(Utils.server_transact);
 
             listOfTransactions = new ListViewRow [] {
-                    new ListViewRow(R.drawable.ic_attach_money_black_36dp, "Koi Palace", "You paid $25 on 23/08/2015")
+                    new ListViewRow(R.drawable.ic_attach_money_black_36dp, "Koi Palace", "You paid $25 on 23/08/2015", "1")
             };
 
             adapter = new ListViewRowAdapter(getActivity(), R.layout.list_view_item_row, listOfTransactions);

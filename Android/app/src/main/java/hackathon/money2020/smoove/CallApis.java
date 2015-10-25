@@ -1,5 +1,7 @@
 package hackathon.money2020.smoove;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -15,12 +17,18 @@ import java.net.URL;
 /**
  * Created by sai on 10/24/15.
  */
-public class CallApis extends AsyncTask<String, Void, Object> {
+public class CallApis extends AsyncTask<String, Void, JSONArray> {
+
+    Activity callingActivity;
+    public CallApis(Activity activity) {
+        callingActivity = activity;
+    }
+    public CallApis() {
+    }
     @Override
     protected JSONArray doInBackground(String... urlString) {
 
         String resultToDisplay = "";
-
         JSONArray json;
 
         // HTTP Get
@@ -38,12 +46,6 @@ public class CallApis extends AsyncTask<String, Void, Object> {
             in.close();
 
             json = new JSONArray(resultToDisplay);
-
-            for (int i=0; i < json.length(); i++) {
-                convertToListViewRow(json.getJSONObject(i));
-            }
-
-
         } catch (Exception e ) {
             System.out.println(e.getMessage());
             return null;
@@ -51,23 +53,13 @@ public class CallApis extends AsyncTask<String, Void, Object> {
         return json;
     }
 
-    protected void onPostExecute(JSONObject result) {
-        System.out.println("RESULTS: "+result.toString());
-    }
-
-    private ListViewRow convertToListViewRow(JSONObject obj) throws JSONException {
-
-        String title = obj.optString("txn_date");
-        if (title.equals("")) {
-            //RESERVATION
-            title = obj.optString("rsvn_time");
-            System.out.println("rsvn" + title);
-        } else {
-            //TXN
-            System.out.println("txn" + title);
+    @Override
+    protected void onPostExecute(JSONArray result) {
+        if (callingActivity != null && callingActivity instanceof SearchActivity) {
+            SearchActivity activity = (SearchActivity) callingActivity;
+            activity.setListOfRestaurants(result);
+            activity.updateUi();
+            Log.d("Async", "I'm here");
         }
-
-
-        return null;
     }
 }
