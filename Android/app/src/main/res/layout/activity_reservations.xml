@@ -1,0 +1,147 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="hackathon.money2020.smoove.ReservationsActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/restaurantName"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:textSize="80px"
+            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textAlignment="center"
+            android:background="#e69cca" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Date:"
+                android:textSize="50px"
+                android:id="@+id/descDate"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="100dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="2015-10-25"
+                android:textSize="80px"
+                android:id="@+id/date"
+                android:layout_alignBottom="@+id/descDate"
+                android:layout_centerHorizontal="true" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnDate"
+                android:src="@drawable/ic_mode_edit_black_48dp"
+                android:layout_alignBottom="@+id/date"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:onClick="showDatePickerDialog"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:text="Time:"
+                android:textSize="50px"
+                android:id="@+id/descTime"
+                android:autoText="false"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="00:00"
+                android:textSize="80px"
+                android:id="@+id/time"
+                android:layout_alignBottom="@+id/descTime"
+                android:layout_centerHorizontal="true" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnTime"
+                android:src="@drawable/ic_mode_edit_black_48dp"
+                android:layout_alignBottom="@+id/descTime"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:onClick="showTimePickerDialog" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:text="Pax:"
+                android:textSize="50px"
+                android:id="@+id/descPax"
+                android:autoText="false"
+                android:layout_below="@+id/time"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="68dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/pax"
+                android:layout_alignBottom="@+id/descPax"
+                android:layout_toLeftOf="@+id/btnTime"
+                android:layout_toStartOf="@+id/btnTime"
+                android:hint="1-10" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confirm"
+                android:id="@+id/btnConfirm"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:background="#e69cca"
+                android:onClick="confirmReservation" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:id="@+id/btnCancel"
+                android:background="#eaeaea"
+                android:layout_alignParentBottom="true"
+                android:layout_toLeftOf="@+id/btnConfirm"
+                android:layout_toStartOf="@+id/btnConfirm"
+                android:layout_marginRight="16dp"
+                android:onClick="cancel" />
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>
