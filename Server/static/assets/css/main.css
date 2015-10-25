@@ -2964,20 +2964,6 @@
 	font-family:raleway;
 }
 
-#tableNosubmit {
-	text-decoration:none;
-	width:100%;
-	text-align:center;
-	display:block;
-	background-color:#FFBC00;
-	color:#fff;
-	border:1px solid #FFCB00;
-	padding:10px 0;
-	font-size:20px;
-	cursor:pointer;
-	border-radius:5px
-}
-
 .check_out_btn {
 	display:none;
 }
