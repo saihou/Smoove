@@ -63,7 +63,7 @@ braintree.Configuration.configure(braintree.Environment.Sandbox,
 result = braintree.Transaction.sale({
   "amount": "10.00",
   "merchant_account_id": "smoove_merchant",
-  "payment_method_nonce": "fake-valid-visa-nonce",
+  "payment_method_token": "user_smoove_token",
   "service_fee_amount": '0.10',
   "options": {
      "submit_for_settlement": 'True'
@@ -105,3 +105,6 @@ result = braintree.Transaction.sale({
   # },
   # "channel": "MyShoppingCartProvider"
 })
+
+print result.is_success
+print result.errors.deep_errors

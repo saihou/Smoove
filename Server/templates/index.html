@@ -132,6 +132,9 @@
 			<script src="../static/assets/js/util.js"></script>
 			<!--[if lte IE 8]><script src="../static/assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="../static/assets/js/main.js"></script>
+			<script type=text/javascript>
+				$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+			</script>
 			<script type="text/javascript">
 				$(function() {
 					for (itv = 11; itv < 24; itv++) {
@@ -161,7 +164,12 @@
 				function total_form_submit(user_id, merchant_id, time) {
 					amount = $("input#total_" + time).val();
 					data = [user_id, merchant_id, amount];
-					$.post("/charge_user", JSON.stringify(data));
+					console.log(JSON.stringify(data));
+					$.getJSON($SCRIPT_ROOT + "/charge_user", {
+						txn_data: JSON.stringify(data)
+					}, function() {
+					});
+					location.reload();
 				}
 
 				function change_date(day) {
@@ -180,9 +188,6 @@
 				});
 			});
 			</script>
-			<script type=text/javascript>
-				$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-			</script>
 			<script type="text/javascript">
 			var track_check = {}
 
@@ -197,11 +202,9 @@
 						day = data[4];
 						time = data[5];
 						check_in_track = time + "_" + id;
-						console.log(check_in_track);
 						if (track_check[check_in_track] == undefined) {
 							track_check[check_in_track] = '-';
 						}
-						console.log(track_check);
 						checked_in = track_check[check_in_track];
 						row = '<tbody><tr class="reserve"><th>Customer Name</th><th>Pax</th><th>Table Number</th><th>Status</th></tr><tr></tr><tr><td id="name">'+ name +'</td><td id="pax">'+ pax +'</td><td id="tbl_no_' + time + '"> ' + checked_in + '</td><td id="status"><button id="check_in_' + time + '" onclick="form_show(' + time + ')">Check In</button><button class="check_out_btn" id="check_out_' + time + '" style="display:none" onclick="total_form_show(' + time + ')">Check Out</button><div class="fillTableNo" id="fillTableNo_' + time + '" style="display:none"><div><input id="tableNo_' + time + '" name="tableNo" placeholder="Table Number" type="text"><button id="tableNosubmit" onclick="form_hide(' + time + ')">Confirm</button></div></div><div class="fillTotal" id="fillTotal_' + time + '" style="display:none"><div><input id="total_' + time + '" name="total" placeholder="Amount Due" type="text"><button id="fillSubmit" onclick="total_form_submit(' + id + ',' + merc_id + ',' + time + ')">Confirm</button></div></div></td></tr></tbody>';
 						$('table#rsvn_time_' + time).html(row);

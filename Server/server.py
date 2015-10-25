@@ -2,17 +2,15 @@ from flask import Flask, render_template, request, jsonify
 import mysql.connector as mysql
 import json
 import braintree
+import time
+from datetime import datetime
 
-braintree.Configuration.configure(braintree.Environment.Sandbox,
-                                  merchant_id="mpq4wrxc24y3vbvh",
-                                  public_key="bk2ry3gtc2v2spbm",
-                                  private_key="bef5caa64ef7ba35eb5c1fa215aa8071")
 
 
 app = Flask('Smoove')
 
-smoovedb = mysql.connect(user='browncowmaster', password='hownowbrowncow', host='browncow.ctjebouppjjs.us-west-2.rds.amazonaws.com', database='smoove')
-
+smoovedb = mysql.connect(user='browncowmaster', password='hownowbrowncow', host='browncow.ctjebouppjjs.us-west-2.rds.amazonaws.com', database='smoove', buffered=True)
+DEFAULT_TIP = 0.15
 ###### Web APP #####
 
 @app.route('/', methods=['GET', 'POST'])
@@ -39,27 +37,49 @@ def get_reservation_ajax():
 	cursor.close()
 	return jsonify(result=data)
 
-@app.route('/charge_user', methods=['POST'])
+@app.route('/charge_user', methods=['GET'])
 def charge_user():
+	txn_data = request.args.get('txn_data', [])
+	txn_data = json.loads(txn_data)
 	cursor = smoovedb.cursor()
-	merchant_id = '2'
-	user_id = '1'
-	idtransactions = '3'
-	query = ("SELECT txn_date, txn_merchant_id, txn_user_id, txn_amount, txn_tip, uc.users_paypal_key user_paypal, um.users_paypal_key merchant_paypal\
+	data = {}
+	data['txn_date'] = datetime.now().strftime("%Y-%m-%d %H:%M")
+	data['merchant_id'] = str(txn_data[1])
+	data['user_id'] = str(txn_data[0])
+	data['amount'] = float(txn_data[2])
+	data['tip'] = round(DEFAULT_TIP * data['amount'], 2)
+	print data
+	insert_txn = ("INSERT into transactions (txn_date, txn_merchant_id, txn_user_id, txn_amount, txn_tip) values (%(txn_date)s, %(merchant_id)s, %(user_id)s, %(amount)s, %(tip)s)")
+	cursor.execute(insert_txn, data)
+	smoovedb.commit()
+	find_id = ("SELECT idtransactions, txn_merchant_id from transactions order by idtransactions desc")
+	cursor.execute(find_id)
+	for item in cursor:
+		idtransactions = str(item[0])
+		print idtransactions
+		break
+	user_id = str(data['user_id'])
+	merchant_id = str(data['merchant_id'])
+	find_txn = ("SELECT txn_date, txn_merchant_id, txn_user_id, txn_amount, txn_tip, uc.users_paypal_key user_paypal, um.users_paypal_key merchant_paypal\
 			FROM transactions txn\
 			inner join users_new uc on uc.idusers = txn.txn_user_id\
 			inner join users_new um on um.idusers = txn.txn_merchant_id where idtransactions = " + idtransactions + " \
 			and txn_user_id=" + user_id + " and txn_merchant_id=" + merchant_id)
-	cursor.execute(query)
+	cursor.execute(find_txn)
 	header = ["txn_date", "merchant_id", "user_id", "amount", "tip", "user_paypal", "merchant_paypal"]
-	data = {}
+	data_new = {}
 	for item in cursor:
 		for i in range(len(item)):
-			data[str(header[i])] = str(item[i])
+			data_new[str(header[i])] = str(item[i])
+	print data_new
+	braintree.Configuration.configure(braintree.Environment.Sandbox,
+                                  merchant_id="mpq4wrxc24y3vbvh",
+                                  public_key="bk2ry3gtc2v2spbm",
+                                  private_key="bef5caa64ef7ba35eb5c1fa215aa8071")
 	result = braintree.Transaction.sale({
-				"amount": str(float(data['amount']) + float(data['tip'])) ,
-				"merchant_account_id": data['merchant_paypal'],
-				"payment_method_token": data['user_paypal'],
+				"amount": str(float(data_new['amount']) + float(data_new['tip'])) ,
+				"merchant_account_id": data_new['merchant_paypal'],
+				"payment_method_token": data_new['user_paypal'],
 				"service_fee_amount": '0.10',
 				"options": {
 					"submit_for_settlement": 'True'
