@@ -1,1 +1,219 @@
-{{ data }}
+<!DOCTYPE HTML>
+<!--
+	Striped by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Smoove</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="../static/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../static/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="../static/assets/css/ie8.css" /><![endif]-->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<!--<script src="asset/js/jquery.min.js"></script>-->
+		<!--<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	-->
+	</head>
+	<body>
+
+		<!-- Content -->
+			<div id="content">
+				<div class="inner">
+
+					<!-- Post -->
+						<article class="box post post-excerpt">
+							<header>
+								<h2>Your Reservation</h2>
+							</header>
+							<div class="info">
+								<span class="date"><span class="month">Oct<span>y</span></span> <span id="day" class="day">25</span><span class="year">, 2014</span></span>
+							</div>
+							<div id="timetable">
+							</div>
+						</article>
+
+				</div>
+			</div>
+
+		<!-- Sidebar -->
+			<div id="sidebar">
+
+				<!-- Logo -->
+					<img id="logo" src="../static/images/smoove.png" style="width: 6em;"/>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul>
+							<li class="current"><a href="#">Schedule</a></li>
+							<li><a href="#">Info and Transaction</a></li>
+							<li><a href="#">Logout</a></li>
+						</ul>
+					</nav>
+
+				<!-- Calendar -->
+					<section class="box calendar">
+						<div class="inner">
+							<table>
+								<caption>Oct 2015</caption>
+								<thead>
+									<tr>
+										<th scope="col" title="Monday">M</th>
+										<th scope="col" title="Tuesday">T</th>
+										<th scope="col" title="Wednesday">W</th>
+										<th scope="col" title="Thursday">T</th>
+										<th scope="col" title="Friday">F</th>
+										<th scope="col" title="Saturday">S</th>
+										<th scope="col" title="Sunday">S</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td colspan="3" class="pad"><span>&nbsp;</span></td>
+										<td><a href="#" id="day_1" onclick="change_date(1)">1</a></td>
+										<td><a href="#" id="day_2" onclick="change_date(2)">2</a></td>
+										<td><a href="#" id="day_3" onclick="change_date(3)">3</a></td>
+										<td><a href="#" id="day_4" onclick="change_date(4)">4</a></td>
+									</tr>
+									<tr>
+
+										<td><a href="#" id="day_5" onclick="change_date(5)">5</a></td>
+										<td><a href="#" id="day_6" onclick="change_date(6)">6</a></td>
+										<td><a href="#" id="day_7" onclick="change_date(7)">7</a></td>
+										<td><a href="#" id="day_8" onclick="change_date(8)">8</a></td>
+										<td><a href="#" id="day_9" onclick="change_date(9)">9</a></td>
+										<td><a href="#" id="day_10" onclick="change_date(10)">10</a></td>
+										<td><a href="#" id="day_11" onclick="change_date(11)">11</a></td>
+									</tr>
+									<tr>
+										<td><a href="#" id="day_12" onclick="change_date(12)">12</a></td>
+										<td><a href="#" id="day_13" onclick="change_date(13)">13</a></td>
+										<td><a href="#" id="day_14" onclick="change_date(14)">14</a></td>
+										<td><a href="#" id="day_15" onclick="change_date(15)">15</a></td>
+										<td><a href="#" id="day_16" onclick="change_date(16)">16</a></td>
+										<td><a href="#" id="day_17" onclick="change_date(17)">17</a></td>
+										<td><a href="#" id="day_18" onclick="change_date(18)">18</a></td>
+									</tr>
+									<tr>
+										<td><a href="#" id="day_19" onclick="change_date(19)">19</a></td>
+										<td><a href="#" id="day_20" onclick="change_date(20)">20</a></td>
+										<td><a href="#" id="day_21" onclick="change_date(21)">21</a></td>
+										<td><a href="#" id="day_22" onclick="change_date(22)">22</a></td>
+										<td><a href="#" id="day_23" onclick="change_date(23)">23</a></td>
+										<td><a href="#" id="day_24" onclick="change_date(24)">24</a></td>
+										<td class="today"><a href="#" id="day_25" onclick="change_date(25)">25</a></td>
+									</tr>
+									<tr>
+										<td><a href="#" id="day_26" onclick="change_date(26)">26</a></td>
+										<td><a href="#" id="day_27" onclick="change_date(27)">27</a></td>
+										<td><a href="#" id="day_28" onclick="change_date(28)">28</a></td>
+										<td><a href="#" id="day_29" onclick="change_date(29)">29</a></td>
+										<td><a href="#" id="day_30" onclick="change_date(30)">30</a></td>
+										<td><a href="#" id="day_31" onclick="change_date(31)">31</a></td>
+										<td class="pad" colspan="1"><span>&nbsp;</span></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</section>
+
+				<!-- Copyright -->
+					<ul id="copyright">
+						<li>&copy; Untitled.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+
+			</div>
+
+			<!-- Table Number Form -->
+			<div id="fillTableNo">
+				<div>
+					<form action="#" id="tableNoForm" name="form">
+						<input id="tableNo" name="tableNo" placeholder="Table Number" type="text">
+						<button id="tableNosubmit" onclick="form_hide()">Confirm</button>
+					</form>
+				</div>
+			</div>
+
+
+		<!-- Scripts -->
+			<script src="../static/assets/js/jquery.min.js"></script>
+			<script src="../static/assets/js/skel.min.js"></script>
+			<script src="../static/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../static/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../static/assets/js/main.js"></script>
+			<script type="text/javascript">
+				$(function() {
+
+					/* var rsvn_data = [{"name": "Jack", "user_id": 11, "time": "11:00", "pax": 5},
+									 {"name": "Sai", "user_id": 12, "time": "13:00", "pax": 3},
+									 {"name": "Shing", "user_id": 13, "time": "12:00", "pax": 2},
+									 {"name": "Will", "user_id": 14, "time": "14:00", "pax": 6},
+									 {"name": "Tyler", "user_id": 15, "time": "11:00", "pax": 10}]
+									 */
+					for (itv = 11; itv < 24; itv++) {
+						time = itv;
+						time_24 = time.toString() + ":00";
+
+						row = '<table class="default"> <thead><tr><td colspan="5">' + time_24 + '</td></tr></thead></table><div class="tableWrap"><table id=' + time_24 + '><tbody><tr class="reserve"><th>Customer Name</th><th>Pax</th><th>Checked-in</th><th>Table Number</th><th>Check out</th></tr>';
+						$("div#timetable").append(row);
+					}
+
+				});
+
+				function form_show() {
+					$("#fillTableNo").show();
+				}
+
+				function form_hide() {
+					$("#fillTableNo").hide();
+				}
+
+				function change_date(day) {
+					$("#day").html(day);
+				}
+
+
+				
+			</script>
+			<script type="text/javascript">
+			$(function() {
+				$("div.tableWrap").hide();
+				$("thead").click(function () {
+					get_rsvn();
+					$(this).parent().next("div").slideToggle();
+				});
+			});
+			</script>
+			<script type=text/javascript>
+				$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+			</script>
+			<script type="text/javascript">
+			function get_rsvn() {
+				$.getJSON($SCRIPT_ROOT + '/get_reservation_ajax', {}, function(rsvn_data) {
+					console.log(rsvn_data.result)
+					for (index in rsvn_data.result) {
+						data = rsvn_data.result[index];
+						console.log(data)
+						if (data[5] == time_24) {
+							name = data[6];
+							pax = data[3];
+							id = data[1];
+							merc_id = data[2];
+							day = data[4];
+							row = '<tr id=' + id + '><td id="name">'+ name +'</td><td id="pax">'+ pax +'</td><td id="check_in"><button id="check_in" onclick="form_show()">Check In</button><div id="fillTableNo"><div><form action="#" id="tableNoForm" name="form"><input id="tableNo" name="tableNo" placeholder="Table Number" type="text"><button id="tableNosubmit" onclick="form_hide()">Confirm</button></form></div></div></td><td id="tbl_no">-</td><td id="check_out">-</td></tr>';
+						}
+					}
+					row += '</tbody></table></div>'
+					console.log(row);
+					$("div#timetable").append(row);
+				});
+			}
+
+
+			</script>
+			
+
+		</body>
+</html>
