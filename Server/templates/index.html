@@ -161,9 +161,9 @@
 					$("div#fillTotal_" + time).show();
 				}
 
-				function total_form_submit(user_id, merchant_id, time) {
+				function total_form_submit(user_id, merchant_id, time, rsvnID) {
 					amount = $("input#total_" + time).val();
-					data = [user_id, merchant_id, amount];
+					data = [user_id, merchant_id, amount, rsvnID];
 					console.log(JSON.stringify(data));
 					$.getJSON($SCRIPT_ROOT + "/charge_user", {
 						txn_data: JSON.stringify(data)
@@ -201,12 +201,13 @@
 						merc_id = data[2];
 						day = data[4];
 						time = data[5];
+						rsvnID = data[7]
 						check_in_track = time + "_" + id;
 						if (track_check[check_in_track] == undefined) {
 							track_check[check_in_track] = '-';
 						}
 						checked_in = track_check[check_in_track];
-						row = '<tbody><tr class="reserve"><th>Customer Name</th><th>Pax</th><th>Table Number</th><th>Status</th></tr><tr></tr><tr><td id="name">'+ name +'</td><td id="pax">'+ pax +'</td><td id="tbl_no_' + time + '"> ' + checked_in + '</td><td id="status"><button id="check_in_' + time + '" onclick="form_show(' + time + ')">Check In</button><button class="check_out_btn" id="check_out_' + time + '" style="display:none" onclick="total_form_show(' + time + ')">Check Out</button><div class="fillTableNo" id="fillTableNo_' + time + '" style="display:none"><div><input id="tableNo_' + time + '" name="tableNo" placeholder="Table Number" type="text"><button id="tableNosubmit" onclick="form_hide(' + time + ')">Confirm</button></div></div><div class="fillTotal" id="fillTotal_' + time + '" style="display:none"><div><input id="total_' + time + '" name="total" placeholder="Amount Due" type="text"><button id="fillSubmit" onclick="total_form_submit(' + id + ',' + merc_id + ',' + time + ')">Confirm</button></div></div></td></tr></tbody>';
+						row = '<tbody><tr class="reserve"><th>Customer Name</th><th>Pax</th><th>Table Number</th><th>Status</th></tr><tr></tr><tr><td id="name">'+ name +'</td><td id="pax">'+ pax +'</td><td id="tbl_no_' + time + '"> ' + checked_in + '</td><td id="status"><button id="check_in_' + time + '" onclick="form_show(' + time + ')">Check In</button><button class="check_out_btn" id="check_out_' + time + '" style="display:none" onclick="total_form_show(' + time + ')">Check Out</button><div class="fillTableNo" id="fillTableNo_' + time + '" style="display:none"><div><input id="tableNo_' + time + '" name="tableNo" placeholder="Table Number" type="text"><button id="tableNosubmit" onclick="form_hide(' + time + ')">Confirm</button></div></div><div class="fillTotal" id="fillTotal_' + time + '" style="display:none"><div><input id="total_' + time + '" name="total" placeholder="Amount Due" type="text"><button id="fillSubmit" onclick="total_form_submit(' + id + ',' + merc_id + ',' + time + ',' + rsvnID + ')">Confirm</button></div></div></td></tr></tbody>';
 						$('table#rsvn_time_' + time).html(row);
 						if (track_check[check_in_track] != '-') {
 							$("button#check_in_" + time).hide();

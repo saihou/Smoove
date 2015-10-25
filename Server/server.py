@@ -29,7 +29,7 @@ def index():
 @app.route('/get_reservation_ajax')
 def get_reservation_ajax():
 	cursor = smoovedb.cursor()
-	query = ("SELECT rs.rsvn_date, rs.rsvn_user_id, rs.rsvn_merchant_id, rs.rsvn_pax, day(rs.rsvn_time_in) rsvn_day, hour(rs.rsvn_time_in) rsvn_hour, u.users_first_name FROM reservations rs inner join users_new u on u.idusers = rs.rsvn_user_id where rs.rsvn_time_out is null")
+	query = ("SELECT rs.rsvn_date, rs.rsvn_user_id, rs.rsvn_merchant_id, rs.rsvn_pax, day(rs.rsvn_time_in) rsvn_day, hour(rs.rsvn_time_in) rsvn_hour, u.users_first_name, rs.idreservations FROM reservations rs inner join users_new u on u.idusers = rs.rsvn_user_id where rs.rsvn_time_out is null")
 	cursor.execute(query)
 	data = []
 	for item in cursor:
@@ -48,7 +48,10 @@ def charge_user():
 	data['user_id'] = str(txn_data[0])
 	data['amount'] = float(txn_data[2])
 	data['tip'] = round(DEFAULT_TIP * data['amount'], 2)
-	print data
+	rsvnID = str(txn_data[3])
+	update_rsvn = ("Update reservations set rsvn_time_out = " + str(data['txn_date']) + " where idreservations=" + rsvnID)
+	cursor.execute(update_rsvn)
+	smoovedb.commit()
 	insert_txn = ("INSERT into transactions (txn_date, txn_merchant_id, txn_user_id, txn_amount, txn_tip) values (%(txn_date)s, %(merchant_id)s, %(user_id)s, %(amount)s, %(tip)s)")
 	cursor.execute(insert_txn, data)
 	smoovedb.commit()
