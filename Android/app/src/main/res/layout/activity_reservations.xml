@@ -106,16 +106,28 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="68dp" />
 
-            <EditText
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:ems="10"
                 android:id="@+id/pax"
+                android:textSize="80px"
                 android:layout_alignBottom="@+id/descPax"
-                android:layout_toLeftOf="@+id/btnTime"
-                android:layout_toStartOf="@+id/btnTime"
-                android:hint="1-10" />
+                android:layout_alignLeft="@+id/time"
+                android:layout_alignStart="@+id/time"
+                android:layout_alignRight="@+id/btnCancel"
+                android:layout_alignEnd="@+id/btnCancel"
+                android:text="1" />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnPax"
+                android:src="@drawable/ic_mode_edit_black_48dp"
+                android:layout_alignBottom="@+id/pax"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:onClick="showNumberPickerDialog" />
 
             <Button
                 android:layout_width="wrap_content"
