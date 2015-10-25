@@ -2234,7 +2234,7 @@
 		text-shadow: -1px -1px 0px rgba(0, 0, 0, 0.5);
 		width: 14em;
 		height: 100%;
-		padding: 3em 1.35em 1em 1.15em;
+		padding: 0.5em 1.35em 1em 1.15em;
 		background: #364050 url("images/bg01.png");
 		left: 0;
 		box-shadow: inset -0.1em 0em 0.35em 0em rgba(0, 0, 0, 0.15);
@@ -2246,7 +2246,7 @@
 
 		#sidebar section, #sidebar nav {
 			position: relative;
-			margin: 2em 0 0 0;
+			margin: 0.5em 0 0 0;
 			font-size: 0.9em;
 		}
 
