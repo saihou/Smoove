@@ -38,6 +38,7 @@ public class ListViewRowAdapter extends ArrayAdapter<ListViewRow> {
             holder.imgIcon = (ImageView)row.findViewById(R.id.imgIcon);
             holder.txtTitle = (TextView)row.findViewById(R.id.txtTitle);
             holder.txtDesc = (TextView)row.findViewById(R.id.txtDesc);
+            holder.txtId = (TextView)row.findViewById(R.id.merchantId);
 
             row.setTag(holder);
         }
@@ -50,6 +51,7 @@ public class ListViewRowAdapter extends ArrayAdapter<ListViewRow> {
         holder.txtTitle.setText(lvr.title);
         holder.imgIcon.setImageResource(lvr.icon);
         holder.txtDesc.setText(lvr.desc);
+        holder.txtId.setText(lvr.id);
 
         return row;
     }
@@ -59,5 +61,6 @@ public class ListViewRowAdapter extends ArrayAdapter<ListViewRow> {
         ImageView imgIcon;
         TextView txtTitle;
         TextView txtDesc;
+        TextView txtId;
     }
 }

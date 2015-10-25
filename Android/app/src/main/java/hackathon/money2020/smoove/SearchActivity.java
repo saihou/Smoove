@@ -1,24 +1,23 @@
 package hackathon.money2020.smoove;
 
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Calendar;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class SearchActivity extends AppCompatActivity {
     ListView listView;
@@ -39,8 +38,13 @@ public class SearchActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item = ((TextView) view.findViewById(R.id.txtTitle)).getText().toString();
-                Toast.makeText(getBaseContext(), item, Toast.LENGTH_SHORT).show();
+                String merchantName = ((TextView) view.findViewById(R.id.txtTitle)).getText().toString();
+                String merchantId = ((TextView) view.findViewById(R.id.merchantId)).getText().toString();
+
+                Intent intent = new Intent(getBaseContext(), ReservationsActivity.class);
+                intent.putExtra("merchant_id", merchantId);
+                intent.putExtra("merchant_name", merchantName);
+                startActivity(intent);
             }
         });
 
@@ -101,8 +105,8 @@ public class SearchActivity extends AppCompatActivity {
 
         if (searchPhrase.length() > 2) {
             //search
-            addToListView();
-            Toast.makeText(getBaseContext(), "Searching for " + searchPhrase + "!", Toast.LENGTH_SHORT).show();
+            new CallApis(this).execute(Utils.server_restaurant);
+            Toast.makeText(getBaseContext(), "Please wait...", Toast.LENGTH_SHORT).show();
         } else if (searchPhrase.length() > 0){
             Toast.makeText(getBaseContext(), "Type something longer damn it", Toast.LENGTH_SHORT).show();
         } else {
@@ -111,13 +115,26 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-    public void addToListView() {
-        //listOfRestaurants = GETJSONOBJECTFROMSERVER
-        //hardcode for now
-        listOfRestaurants = new ListViewRow[] {
-                new ListViewRow(android.R.drawable.ic_menu_gallery, "Denny's", "A fast food restaurant that seems good but I haven't got the chance to eat"),
-                new ListViewRow(android.R.drawable.ic_menu_add, "Koi Palace", "Bloody expensive and bloody good Chinese food")
-        };
+    public void setListOfRestaurants(JSONArray obj) {
+        if (obj == null) return;
+        Log.e("SearchA", obj.toString());
+
+        listOfRestaurants = new ListViewRow[obj.length()];
+
+        for (int i = 0; i < listOfRestaurants.length; i++) {
+            JSONObject jsonObj = obj.optJSONObject(i);
+            if (jsonObj!=null) {
+                String merchant_id = jsonObj.optString("merchant_id");
+                String title = jsonObj.optString("company_name");
+                String desc = jsonObj.optString("desc");
+                listOfRestaurants[i] = new ListViewRow(android.R.drawable.ic_menu_gallery, title, desc, merchant_id);
+            } else {
+                Log.e("SearchA", "Error");
+            }
+        }
+    }
+
+    public void updateUi() {
         adapter = new ListViewRowAdapter(this, R.layout.list_view_item_row, listOfRestaurants);
         listView.setAdapter(adapter);
     }
