@@ -38,7 +38,11 @@ public class CallApis extends AsyncTask<String, Void, Object> {
             in.close();
 
             json = new JSONArray(resultToDisplay);
-            System.out.println(json.toString());
+
+            for (int i=0; i < json.length(); i++) {
+                convertToListViewRow(json.getJSONObject(i));
+            }
+
 
         } catch (Exception e ) {
             System.out.println(e.getMessage());
@@ -52,6 +56,18 @@ public class CallApis extends AsyncTask<String, Void, Object> {
     }
 
     private ListViewRow convertToListViewRow(JSONObject obj) throws JSONException {
-        String title = obj.getString("")
+
+        String title = obj.optString("txn_date");
+        if (title.equals("")) {
+            //RESERVATION
+            title = obj.optString("rsvn_time");
+            System.out.println("rsvn" + title);
+        } else {
+            //TXN
+            System.out.println("txn" + title);
+        }
+
+
+        return null;
     }
 }

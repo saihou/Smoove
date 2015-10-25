@@ -40,7 +40,9 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String item = ((TextView) view.findViewById(R.id.txtTitle)).getText().toString();
-                Toast.makeText(getBaseContext(), item, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getBaseContext(), ReservationsActivity.class);
+                startActivity(intent);
+                //Toast.makeText(getBaseContext(), item, Toast.LENGTH_SHORT).show();
             }
         });
 

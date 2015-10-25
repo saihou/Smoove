@@ -8,7 +8,7 @@ public class ListViewRow {
     public String title;
     public String desc;
 
-    public ListViewRow(){
+    public ListViewRow() {
         super();
     }
 
