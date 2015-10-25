@@ -126,17 +126,6 @@
 
 			</div>
 
-			<!-- Table Number Form -->
-			<div id="fillTableNo">
-				<div>
-					<form action="#" id="tableNoForm" name="form">
-						<input id="tableNo" name="tableNo" placeholder="Table Number" type="text">
-						<button id="tableNosubmit" onclick="form_hide()">Confirm</button>
-					</form>
-				</div>
-			</div>
-
-
 		<!-- Scripts -->
 			<script src="../static/assets/js/jquery.min.js"></script>
 			<script src="../static/assets/js/skel.min.js"></script>
@@ -145,29 +134,23 @@
 			<script src="../static/assets/js/main.js"></script>
 			<script type="text/javascript">
 				$(function() {
-
-					/* var rsvn_data = [{"name": "Jack", "user_id": 11, "time": "11:00", "pax": 5},
-									 {"name": "Sai", "user_id": 12, "time": "13:00", "pax": 3},
-									 {"name": "Shing", "user_id": 13, "time": "12:00", "pax": 2},
-									 {"name": "Will", "user_id": 14, "time": "14:00", "pax": 6},
-									 {"name": "Tyler", "user_id": 15, "time": "11:00", "pax": 10}]
-									 */
 					for (itv = 11; itv < 24; itv++) {
 						time_24 = itv.toString() + ":00";
 
-						row = '<table class="default"> <thead><tr><td colspan="5">' + time_24 + '</td></tr></thead></table><div class="tableWrap"><table id=rsvn_time_' + itv + '><tbody><tr class="reserve"><th>Customer Name</th><th>Pax</th><th>Checked-in</th><th>Table Number</th><th>Check out</th></tr><tr></tr></tbody></table></div>';
+						row = '<table class="default"> <thead><tr><td colspan="5">' + time_24 + '</td></tr></thead></table><div class="tableWrap"><table id=rsvn_time_' + itv + '><tbody><tr class="reserve"><th>Customer Name</th><th>Pax</th><th>Table Number</th><th>Status</th></tr><tr></tr></tbody></table></div>';
 						$("div#timetable").append(row);
 					}
 
 				});
 
-				function form_show() {
-					$("#fillTableNo").show();
+				function form_show(time) {
+					$("button#check_in_" + time).hide();
+					$("div#fillTableNo_" + time).show();
 				}
 
-				function form_hide() {
-					$("#fillTableNo").hide();
-					update_table_number();
+				function form_hide(time) {
+					update_table_number(time);
+					$("div#fillTableNo_" + time).hide();
 				}
 
 				function change_date(day) {
@@ -199,13 +182,16 @@
 						id = data[1];
 						merc_id = data[2];
 						day = data[4];
-						row = '<tbody><tr class="reserve"><th>Customer Name</th><th>Pax</th><th>Checked-in</th><th>Table Number</th><th>Check out</th></tr><tr></tr><tr><td id="name">'+ name +'</td><td id="pax">'+ pax +'</td><td id="check_in"><button id="check_in" onclick="form_show()">Check In</button><div id="fillTableNo"><div><form action="#" id="tableNoForm" name="form"><input id="tableNo" name="tableNo" placeholder="Table Number" type="text"><button id="tableNosubmit" onclick="form_hide()">Confirm</button></form></div></div></td><td id="tbl_no">-</td><td id="check_out">-</td></tr></tbody>';
-						$('table#rsvn_time_' + data[5]).html(row);
+						time = data[5];
+						row = '<tbody><tr class="reserve"><th>Customer Name</th><th>Pax</th><th>Table Number</th><th>Status</th></tr><tr></tr><tr><td id="name">'+ name +'</td><td id="pax">'+ pax +'</td><td id="tbl_no_' + time + '">-</td><td id="status"><button id="check_in_' + time + '" onclick="form_show(' + time + ')">Check In</button><button class="check_out_btn" id="check_out_' + time + '" onclick="cost_form_show(' + time + ')">Check Out</button><div class="fillTableNo" id="fillTableNo_' + time + '"><div><input id="tableNo_' + time + '" name="tableNo" placeholder="Table Number" type="text"><button id="tableNosubmit" onclick="form_hide(' + time + ')">Confirm</button></div></div></td></tr></tbody>';
+						$('table#rsvn_time_' + time).html(row);
 					}
 				});
 			}
-			function update_table_number() {
-
+			function update_table_number(time) {
+				tableNo = $('input#tableNo_' + time).val();
+				$('td#tbl_no_' + time).html(tableNo);
+				$('button#check_out_' + time).show();
 			}
 
 			</script>
