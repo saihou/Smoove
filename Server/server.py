@@ -43,13 +43,14 @@ def charge_user():
 	txn_data = json.loads(txn_data)
 	cursor = smoovedb.cursor()
 	data = {}
-	data['txn_date'] = datetime.now().strftime("%Y-%m-%d %H:%M")
+	data['txn_date'] = str(datetime.now())
 	data['merchant_id'] = str(txn_data[1])
 	data['user_id'] = str(txn_data[0])
 	data['amount'] = float(txn_data[2])
 	data['tip'] = round(DEFAULT_TIP * data['amount'], 2)
 	rsvnID = str(txn_data[3])
-	update_rsvn = ("Update reservations set rsvn_time_out = " + str(data['txn_date']) + " where idreservations=" + rsvnID)
+	print(rsvnID)
+	update_rsvn = ('Update reservations set rsvn_time_out ="' + str(datetime.now()) + '" where idreservations=' + rsvnID)
 	cursor.execute(update_rsvn)
 	smoovedb.commit()
 	insert_txn = ("INSERT into transactions (txn_date, txn_merchant_id, txn_user_id, txn_amount, txn_tip) values (%(txn_date)s, %(merchant_id)s, %(user_id)s, %(amount)s, %(tip)s)")
@@ -125,7 +126,7 @@ def get_rsvn(user_id):
 	query = ("SELECT rs.rsvn_date date_recorded, rs.rsvn_pax pax, rs.rsvn_time_in rsvn_time, uc.users_first_name client_first_name, uc.users_last_name client_last_name, um.users_first_name merchant_name \
 				FROM reservations rs \
 				inner join users_new uc on uc.idusers = rs.rsvn_user_id \
-				inner join users_new um on um.idusers = rs.rsvn_merchant_id where rs.rsvn_user_id=" + user_id + " order by rs.rsvn_date")
+				inner join users_new um on um.idusers = rs.rsvn_merchant_id where rs.rsvn_user_id=" + user_id + " and rs.rsvn_time_out is not null order by rs.rsvn_date")
 	cursor.execute(query)
 	header = ["date_recorded", "pax", "rsvn_time", "client_first_name", "client_last_name", "merchant_name"]
 	data = []
