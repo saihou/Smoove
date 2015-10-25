@@ -118,7 +118,7 @@ public class TabbedFragment extends Fragment {
 
                 String title = merchant_name + " - $" + total;
                 String desc = "You were here on " + date;
-                listOfTransactions[i] = new ListViewRow(android.R.drawable.ic_menu_gallery, title, desc, "");
+                listOfTransactions[i] = new ListViewRow(title, desc, "");
             } else {
                 Log.e("TabbedF", "Error");
             }
@@ -138,8 +138,8 @@ public class TabbedFragment extends Fragment {
                 String pax = jsonObj.optString("pax");
                 String rsvn_time = jsonObj.optString("rsvn_time");
                 String title = merchant_name + " for " + pax;
-                String desc = rsvn_time;
-                listOfReservations[i] = new ListViewRow(android.R.drawable.ic_menu_gallery, title, desc, "");
+                String desc = "Reservation at: "+rsvn_time.substring(0, rsvn_time.length()-3);
+                listOfReservations[i] = new ListViewRow(title, desc, "");
             } else {
                 Log.e("TabbedF", "Error");
             }

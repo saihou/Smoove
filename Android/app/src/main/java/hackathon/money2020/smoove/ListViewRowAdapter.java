@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -35,10 +34,13 @@ public class ListViewRowAdapter extends ArrayAdapter<ListViewRow> {
             row = inflater.inflate(layoutResourceId, parent, false);
 
             holder = new ListViewRowHolder();
-            holder.imgIcon = (ImageView)row.findViewById(R.id.imgIcon);
             holder.txtTitle = (TextView)row.findViewById(R.id.txtTitle);
             holder.txtDesc = (TextView)row.findViewById(R.id.txtDesc);
             holder.txtId = (TextView)row.findViewById(R.id.merchantId);
+            View bg = row.findViewById(R.id.row);
+            if (bg != null) {
+                setRandomBackground(bg);
+            }
 
             row.setTag(holder);
         }
@@ -49,16 +51,35 @@ public class ListViewRowAdapter extends ArrayAdapter<ListViewRow> {
 
         ListViewRow lvr = data[position];
         holder.txtTitle.setText(lvr.title);
-        holder.imgIcon.setImageResource(lvr.icon);
         holder.txtDesc.setText(lvr.desc);
         holder.txtId.setText(lvr.id);
 
         return row;
     }
 
+    public void setRandomBackground(View bg) {
+        int rdm = (int) Math.round(Math.random() * 4.0f);
+        switch (rdm) {
+            case 0:
+                bg.setBackgroundResource(R.drawable.laksa);
+                break;
+            case 1:
+                bg.setBackgroundResource(R.drawable.chicken_rice);
+                break;
+            case 2:
+                bg.setBackgroundResource(R.drawable.hokkien_mee);
+                break;
+            case 3:
+                bg.setBackgroundResource(R.drawable.char_kway_teow);
+                break;
+            case 4:
+                bg.setBackgroundResource(R.drawable.wanton_mee);
+                break;
+        }
+    }
+
     static class ListViewRowHolder
     {
-        ImageView imgIcon;
         TextView txtTitle;
         TextView txtDesc;
         TextView txtId;

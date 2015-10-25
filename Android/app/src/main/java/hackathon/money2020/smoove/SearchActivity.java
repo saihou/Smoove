@@ -67,6 +67,8 @@ public class SearchActivity extends AppCompatActivity {
                 performSearch();
             }
         });
+
+        performSearch();
     }
 
     @Override
@@ -103,16 +105,16 @@ public class SearchActivity extends AppCompatActivity {
         ///******///******///*/////*///*//***////****///*////*///
         String searchPhrase = txtSearch.getText().toString().trim();
 
-        if (searchPhrase.length() > 2) {
+//        if (searchPhrase.length() > 2) {
             //search
             new CallApis(this).execute(Utils.server_restaurant);
             Toast.makeText(getBaseContext(), "Please wait...", Toast.LENGTH_SHORT).show();
-        } else if (searchPhrase.length() > 0){
-            Toast.makeText(getBaseContext(), "Type something longer damn it", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getBaseContext(), "You gotta type something", Toast.LENGTH_SHORT).show();
-            txtSearch.clearFocus();
-        }
+//        } else if (searchPhrase.length() > 0){
+//            Toast.makeText(getBaseContext(), "Type something longer damn it", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(getBaseContext(), "You gotta type something", Toast.LENGTH_SHORT).show();
+//            txtSearch.clearFocus();
+//        }
     }
 
     public void setListOfRestaurants(JSONArray obj) {
@@ -127,7 +129,7 @@ public class SearchActivity extends AppCompatActivity {
                 String merchant_id = jsonObj.optString("merchant_id");
                 String title = jsonObj.optString("company_name");
                 String desc = jsonObj.optString("desc");
-                listOfRestaurants[i] = new ListViewRow(android.R.drawable.ic_menu_gallery, title, desc, merchant_id);
+                listOfRestaurants[i] = new ListViewRow(title, desc, merchant_id);
             } else {
                 Log.e("SearchA", "Error");
             }

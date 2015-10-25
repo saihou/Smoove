@@ -82,6 +82,10 @@ public class ReservationsActivity extends AppCompatActivity {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getFragmentManager(), "datePicker");
     }
+    public void showNumberPickerDialog(View v) {
+        DialogFragment newFragment = new NumberPickerFragment();
+        newFragment.show(getFragmentManager(), "numberPicker");
+    }
 
     public void cancel(View v) {
         this.finish();
