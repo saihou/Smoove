@@ -182,23 +182,29 @@
 				$("div.tableWrap").hide();
 				$("thead").click(function () {
 					$(this).parent().next("div").slideToggle();
-					$.getJSON('/_get_reservations', {
-						time: $(this).text().substring(0, 2);
-					}, function(rsvn_data) {
-						for (index in rsvn_data) {
-							data = rsvn_data[index];
-							if (data['time'] == time_24) {
-								name = data['name'];
-								pax = data['pax'];
-								id = data['user_id'];
-								row = '<tr id=' + id + '><td id="name">'+ name +'</td><td id="pax">'+ pax +'</td><td id="check_in"><button id="check_in" onclick="form_show()">Check In</button><div id="fillTableNo"><div><form action="#" id="tableNoForm" name="form"><input id="tableNo" name="tableNo" placeholder="Table Number" type="text"><button id="tableNosubmit" onclick="form_hide()">Confirm</button></form></div></div></td><td id="tbl_no">-</td><td id="check_out">-</td></tr>';
-							}
-						}
-						row += '</tbody></table></div>'
-						$("div#timetable").append(row);
-					});
 				});
+			});
 			</script>
+			<script type="text/javascript">
+			function somefucker() {
+				$.getJSON('/get_reservation_ajax', {}, function(rsvn_data) {
+					for (index in rsvn_data.result) {
+						data = rsvn_data[index];
+						if (data['time'] == time_24) {
+							name = data['name'];
+							pax = data['pax'];
+							id = data['user_id'];
+							row = '<tr id=' + id + '><td id="name">'+ name +'</td><td id="pax">'+ pax +'</td><td id="check_in"><button id="check_in" onclick="form_show()">Check In</button><div id="fillTableNo"><div><form action="#" id="tableNoForm" name="form"><input id="tableNo" name="tableNo" placeholder="Table Number" type="text"><button id="tableNosubmit" onclick="form_hide()">Confirm</button></form></div></div></td><td id="tbl_no">-</td><td id="check_out">-</td></tr>';
+						}
+					}
+					row += '</tbody></table></div>'
+					$("div#timetable").append(row);
+				});
+			}
+
+
+			</script>
+			
 
 		</body>
 </html>
