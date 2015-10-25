@@ -1,10 +1,8 @@
 package hackathon.money2020.smoove;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -12,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -108,7 +105,7 @@ public class SearchActivity extends AppCompatActivity {
 
         if (searchPhrase.length() > 2) {
             //search
-            AsyncTask<String, Void, JSONArray> restCall = new CallApis(this).execute(Utils.server_restaurant);
+            new CallApis(this).execute(Utils.server_restaurant);
             Toast.makeText(getBaseContext(), "Please wait...", Toast.LENGTH_SHORT).show();
         } else if (searchPhrase.length() > 0){
             Toast.makeText(getBaseContext(), "Type something longer damn it", Toast.LENGTH_SHORT).show();
@@ -134,7 +131,7 @@ public class SearchActivity extends AppCompatActivity {
             } else {
                 Log.e("SearchA", "Error");
             }
-            }
+        }
     }
 
     public void updateUi() {

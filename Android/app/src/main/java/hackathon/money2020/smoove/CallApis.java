@@ -2,6 +2,7 @@ package hackathon.money2020.smoove;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -17,8 +18,14 @@ import java.net.URL;
 public class CallApis extends AsyncTask<String, Void, JSONArray> {
 
     Activity callingActivity;
+    Fragment callingFragment;
     public CallApis(Activity activity) {
         callingActivity = activity;
+        callingFragment = null;
+    }
+    public CallApis(Fragment fragment) {
+        callingFragment = fragment;
+        callingActivity = null;
     }
     public CallApis() {
     }
@@ -52,10 +59,21 @@ public class CallApis extends AsyncTask<String, Void, JSONArray> {
 
     @Override
     protected void onPostExecute(JSONArray result) {
-        if (callingActivity != null && callingActivity instanceof SearchActivity) {
-            SearchActivity activity = (SearchActivity) callingActivity;
-            activity.setListOfRestaurants(result);
-            activity.updateUi();
+        if (callingActivity != null) {
+            if (callingActivity instanceof SearchActivity) {
+                SearchActivity activity = (SearchActivity) callingActivity;
+                activity.setListOfRestaurants(result);
+                activity.updateUi();
+            }
+        }
+        if (callingFragment != null && callingFragment instanceof TabbedFragment) {
+            TabbedFragment fragment = (TabbedFragment) callingFragment;
+            if (fragment.mPage == 2) {
+                fragment.setListOfTransactions(result);
+            } else {
+                fragment.setListOfReservations(result);
+            }
+            fragment.updateUi();
         }
     }
 }

@@ -2,6 +2,7 @@ package hackathon.money2020.smoove;
 
 
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -9,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -86,7 +88,7 @@ public class ReservationsActivity extends AppCompatActivity {
     }
 
     public void confirmReservation(View v) {
-        String currentTimeStamp = new SimpleDateFormat("yyyy-MM-dd HHmmss").format(Calendar.getInstance().getTime());
+        String currentTimeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
         String numPax = pax.getText().toString();
         String userId = "1";
         String reservationTime = date.getText().toString() + " " + time.getText().toString();
@@ -101,5 +103,12 @@ public class ReservationsActivity extends AppCompatActivity {
         JSONObject jsonObj = new JSONObject(params);
         System.out.println(jsonObj.toString());
         new PostToApis(jsonObj).execute(Utils.server_post_reservation);
+
+        Toast.makeText(this, "Your request has been sent to the server", Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish(); // call this to finish the current activity
     }
 }

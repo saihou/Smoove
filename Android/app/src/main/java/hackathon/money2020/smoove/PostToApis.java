@@ -27,10 +27,10 @@ public class PostToApis extends AsyncTask<String, Void, String> {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            conn.setRequestProperty("Content-Type", "application/json");
             OutputStream os = conn.getOutputStream();
+            System.out.println(jsonObj.toString().getBytes());
             os.write(jsonObj.toString().getBytes());
-            System.out.println(os.toString());
             os.flush();
 
             if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
