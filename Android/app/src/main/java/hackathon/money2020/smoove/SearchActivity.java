@@ -1,6 +1,7 @@
 package hackathon.money2020.smoove;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -101,7 +102,6 @@ public class SearchActivity extends AppCompatActivity {
         if (searchPhrase.length() > 2) {
             //search
             addToListView();
-
             Toast.makeText(getBaseContext(), "Searching for " + searchPhrase + "!", Toast.LENGTH_SHORT).show();
         } else if (searchPhrase.length() > 0){
             Toast.makeText(getBaseContext(), "Type something longer damn it", Toast.LENGTH_SHORT).show();

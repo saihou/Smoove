@@ -3,6 +3,7 @@ package hackathon.money2020.smoove;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
@@ -67,6 +68,8 @@ public class TabbedFragment extends Fragment {
         //If Transactions page, hide FAB
         if (mPage == 2) {
             fab.hide();
+
+            AsyncTask<String, Void, Object> restCall = new CallApis().execute(Utils.server_transact);
 
             listOfTransactions = new ListViewRow [] {
                     new ListViewRow(R.drawable.ic_attach_money_black_36dp, "Koi Palace", "You paid $25 on 23/08/2015")
