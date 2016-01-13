@@ -103,7 +103,12 @@ public class TabbedFragment extends Fragment {
     }
 
     public void setListOfTransactions(JSONArray obj) {
-        if (obj == null) return;
+        if (obj == null) {
+            listOfTransactions = new ListViewRow[2];
+            listOfTransactions[0] = new ListViewRow("The Grill House - $36.10", "You were here on 2015-10-24 20:20:20", "");
+            listOfTransactions[1] = new ListViewRow("Everything with Fries - $9.50", "You were here on 2015-10-31 20:20:20", "");
+            return;
+        }
         Log.e("SearchA", obj.toString());
 
         listOfTransactions = new ListViewRow[obj.length()];
@@ -126,7 +131,13 @@ public class TabbedFragment extends Fragment {
     }
 
     public void setListOfReservations(JSONArray obj) {
-        if (obj == null) return;
+        if (obj == null) {
+            listOfReservations = new ListViewRow[3];
+            listOfReservations[0] = new ListViewRow("Fish and Co. for 5", "Reservation at 2015-11-10 20:20:20", "");
+            listOfReservations[1] = new ListViewRow("Din Tai Fung for 2", "Reservation at 2015-11-23 12:00:00", "");
+            listOfReservations[2] = new ListViewRow("Koi Palace for 3", "Reservation at 2015-12-31 23:59:59", "");
+            return;
+        }
         Log.e("SearchA", obj.toString());
 
         listOfReservations = new ListViewRow[obj.length()];

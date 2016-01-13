@@ -118,7 +118,15 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void setListOfRestaurants(JSONArray obj) {
-        if (obj == null) return;
+        if (obj == null) {
+            listOfRestaurants = new ListViewRow [5];
+            listOfRestaurants[0] = new ListViewRow("Din Tai Fung", "The best place for Dim Sum!", "1");
+            listOfRestaurants[1] = new ListViewRow("Fish and Co", "The best place for Fish!", "2");
+            listOfRestaurants[2] = new ListViewRow("Everything With Fries", "The best place for fries!", "3");
+            listOfRestaurants[3] = new ListViewRow("The Grill House", "The best place for Grills!", "4");
+            listOfRestaurants[4] = new ListViewRow("Koi Palace", "The best place for Koi! I mean Chinese food.", "5");
+            return;
+        }
         Log.e("SearchA", obj.toString());
 
         listOfRestaurants = new ListViewRow[obj.length()];
