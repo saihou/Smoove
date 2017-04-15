@@ -9,7 +9,7 @@ from datetime import datetime
 
 app = Flask('Smoove')
 
-smoovedb = mysql.connect(user='browncowmaster', password='hownowbrowncow', host='browncow.ctjebouppjjs.us-west-2.rds.amazonaws.com', database='smoove', buffered=True)
+smoovedb = mysql.connect(user='browncowmaster', password='hownowbrowncow', host='smoove.ctjebouppjjs.us-west-2.rds.amazonaws.com', database='smoove', buffered=True)
 DEFAULT_TIP = 0.15
 ###### Web APP #####
 
